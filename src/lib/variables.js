@@ -2,8 +2,11 @@
 
 // VITE_LINKEDIN_CLIENT_ID=XXXXXXXXXXX
 
+import { page } from '$app/stores';
+
   let variables = {
-    linkedInClientID: import.meta.env.VITE_LINKEDIN_CLIENT_ID
+    linkedInClientID: import.meta.env.VITE_LINKEDIN_CLIENT_ID,
+    page: page
   };
 
 export default variables;

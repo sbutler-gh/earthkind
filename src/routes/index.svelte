@@ -1,6 +1,7 @@
 <script>
 import variables from "$lib/variables";
 import { connections_store } from "$lib/stores"
+import { page } from "$app/stores";
 
 
     // The passport-linkedin-oauth2 library aws supposed to be helpful for this, but I couldn't get it to work.
@@ -11,7 +12,7 @@ import { connections_store } from "$lib/stores"
     // This function results in CORS errors
 async function sendrequest() {
 
-    const response = await fetch(`https://serene-journey-42564.herokuapp.com/https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${variables.linkedInClientID}&redirect_uri=${window.location.hostname}/auth/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social`, {
+    const response = await fetch(`https://serene-journey-42564.herokuapp.com/https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${variables.linkedInClientID}&redirect_uri=https://${$page.host}/auth/linkedin&state=foobar&scope=r_liteprofile%20r_emailaddress%20w_member_social`, {
             method: 'GET',
             })
 
@@ -66,4 +67,4 @@ async function sendrequest() {
 <button on:click={sendrequest}>click</button>
 
 <!-- By clicking this link, we can hit the API endpoint directly (instead of using fetch), which bypasses CORS errors — but returns different errors instead. -->
-<a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={variables.linkedInClientID}&redirect_uri={window.location.hostname}/auth/linkedin/callback&state=true&scope=r_liteprofile%20r_emailaddress%20w_member_social">linkedin</a>
+<a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id={variables.linkedInClientID}&redirect_uri=https://{$page.host}/auth/linkedin/callback&state=true&scope=r_liteprofile%20r_emailaddress%20w_member_social">linkedin</a>
